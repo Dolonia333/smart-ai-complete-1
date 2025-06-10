@@ -1,0 +1,89 @@
+{
+    "ollama_enabled": true,
+    "ollama_url": "http://localhost:11434/api/generate",
+    "model": "deepseek-r1:14b",
+    "fallback_to_simple": true,
+    
+    "voice": {
+        "enabled": true,
+        "wake_word": "assistant",
+        "language": "en-US",
+        "tts_rate": 200,
+        "tts_voice": "default",
+        "microphone_timeout": 5,
+        "phrase_timeout": 2,
+        "energy_threshold": 300,
+        "dynamic_energy_threshold": true
+    },
+    
+    "plugins": {
+        "enabled": true,
+        "auto_discover": true,
+        "plugin_directory": "plugins",
+        "enabled_plugins": ["weather", "system", "websearch", "knowledge_base", "enhanced_websearch", "advanced_desktop"],
+        "disabled_plugins": []
+    },
+    
+    "weather": {
+        "api_key": "",
+        "default_city": "New York",
+        "units": "metric"
+    },
+      "websearch": {
+        "max_results": 5,
+        "safe_search": "moderate",
+        "timeout": 10
+    },
+    
+    "enhanced_websearch": {
+        "max_results": 10,
+        "news_max_results": 5,
+        "youtube_max_results": 5,
+        "safe_search": "moderate",
+        "timeout": 15,
+        "extract_content": true,
+        "instant_answers": true
+    },
+    
+    "advanced_desktop": {
+        "screenshot_quality": 95,
+        "clipboard_enabled": true,
+        "automation_enabled": true,
+        "mouse_speed": 0.5,
+        "keyboard_interval": 0.05,
+        "window_management": true,
+        "process_monitoring": true
+    },
+    
+    "system": {
+        "allow_shutdown": true,
+        "allow_restart": true,
+        "volume_step": 10,
+        "brightness_step": 10
+    },
+    
+    "logging": {
+        "level": "INFO",
+        "log_to_file": true,
+        "log_file": "assistant.log",
+        "max_log_size": "10MB"
+    },
+    
+    "ui": {
+        "show_startup_banner": true,
+        "colored_output": true,
+        "show_plugin_status": true
+    },
+    
+    "learning": {
+        "enabled": true,
+        "auto_learn": true,
+        "auto_learn_threshold": 0.7,
+        "max_knowledge_age_days": 30,
+        "confidence_threshold": 0.7,
+        "cache_size": 100,
+        "learn_from_responses": true,
+        "web_search_enabled": true,
+        "wikipedia_enabled": true
+    }
+}

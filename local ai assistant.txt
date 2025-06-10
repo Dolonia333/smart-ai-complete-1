@@ -1,0 +1,72 @@
+"""
+Local AI Assistant powered by DeepSeek-R1:14B via Ollama
+- Understands commands like "Open Photoshop"
+- Uses keyword-based intent recognition
+- Opens apps using system calls
+- Built to expand with ML or custom workflows
+"""
+
+import os
+import requests
+
+# === Step 1: Talk to Ollama ===
+def ask_ollama(prompt):
+    try:
+        response = requests.post(
+            "http://localhost:11434/api/generate",
+            json={
+                "model": "deepseek-r1:14b",
+                "prompt": prompt,
+                "stream": False
+            }
+        )
+        response.raise_for_status()  # Raise an error if the request fails
+        return response.json()["response"]
+    except requests.exceptions.RequestException as e:
+        print(f"Error communicating with Ollama: {e}")
+        return "Sorry, I couldn't process that."
+
+# === Step 2: Basic Intent Classifier ===
+def classify_intent(response_text):
+    text = response_text.lower()
+    if "photoshop" in text:
+        return "open_photoshop"
+    elif "discord" in text:
+        return "open_discord"
+    elif "browser" in text or "chrome" in text:
+        return "open_browser"
+    else:
+        return "unknown"
+
+# === Step 3: Action Handler ===
+def handle_action(intent):
+    try:
+        if intent == "open_photoshop":
+            os.system(r'start "C:\Program Files\Adobe\Adobe Photoshop 2023\Photoshop.exe"')
+        elif intent == "open_discord":
+            os.system("start discord.exe")
+        elif intent == "open_browser":
+            os.system("start chrome.exe")
+        else:
+            print("I don't know how to do that yet.")
+    except Exception as e:
+        print(f"Error executing action: {e}")
+
+# === Step 4: Main Loop ===
+def main():
+    print("AI Assistant is running. Type 'exit' to quit.")
+    while True:
+        user_input = input("You: ")
+        if user_input.lower() == "exit":
+            print("Goodbye!")
+            break
+
+        print("Thinking...")
+        ai_response = ask_ollama(user_input)
+        print("AI:", ai_response)
+
+        intent = classify_intent(ai_response)
+        handle_action(intent)
+
+if __name__ == "__main__":
+    main()

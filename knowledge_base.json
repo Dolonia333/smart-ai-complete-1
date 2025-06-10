@@ -1,0 +1,23 @@
+{
+  "entries": {
+    "python": {
+      "topic": "Python",
+      "summary": "Python is a programming language",
+      "details": [],
+      "sources": [
+        "manual"
+      ],
+      "confidence": 1.0,
+      "source": "manual",
+      "stored_date": "2025-05-26T21:11:22.540494",
+      "last_accessed": "2025-05-26T21:11:22.540494",
+      "access_count": 0
+    }
+  },
+  "topics": {
+    "python": "python"
+  },
+  "metadata": {
+    "created": "2025-05-26T21:11:22.529916"
+  }
+}
